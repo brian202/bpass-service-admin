@@ -6,32 +6,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import BoardRegisterForm from '@/views/notice/components/BoardRegisterForm.vue';
-import AxiosService from '@/service';
-import { Board } from '@/store/modules/board';
+import { Component, Vue } from 'vue-property-decorator'
+import BoardRegisterForm from '@/views/notice/components/BoardRegisterForm.vue'
+import AxiosService from '@/service'
+import { Board } from '@/store/modules/board'
 
 @Component({
   components: {
-    BoardRegisterForm,
-  },
+    BoardRegisterForm
+  }
 })
-export default class BoardRegisterPage extends Vue {
-
+export default class extends Vue {
   onSubmit(payload: Board) {
-    const { title, content, writer } = payload;
-    AxiosService.instance.post('noticeList', { title, content, writer })
+    const { id, title, contents, date, priority, created_at, updated_at } = payload
+    AxiosService.instance.post('noticeList', { id, title, contents, date, priority, created_at, updated_at })
       .then((res) => {
-        alert('등록되었습니다.');
+        alert('등록되었습니다.')
         this.$router.push({
           name: 'BoardReadPage',
-          params: { boardNo: res.data.boardNo },
-        });
+          params: { boardNo: res.data.boardNo }
+        })
       })
       .catch((err) => {
-        alert(err.response.data.message);
-      });
+        alert(err.response.data.message)
+      })
   }
-
 }
 </script>

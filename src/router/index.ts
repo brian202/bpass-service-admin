@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 
 /* Layout */
 import Layout from '@/layout/index.vue'
-import { RouterLinkStub } from '@vue/test-utils'
+// import { RouterLinkStub } from '@vue/test-utils'
 
 Vue.use(VueRouter)
 
@@ -98,7 +98,7 @@ export const constantRoutes: RouteConfig[] = [
       {
         path: 'writeNotice',
         name: 'BoardRegisterPage',
-        component: () => import('@/views/notice/pages/BoardRegisterPage.vue'),
+        component: () => import('@/views/notice/pages/BoardRegisterPage.vue')
       },
       {
         path: 'noticeList',
@@ -112,26 +112,27 @@ export const constantRoutes: RouteConfig[] = [
       {
         path: 'noticeList',
         name: 'BoardListPage',
-        component: () => import('@/views/notice/pages/BoardListPage.vue'),
-      },
-    ],
+        component: () => import('@/views/notice/pages/BoardListPage.vue')
+      }
+    ]
   },
   {
     path: 'noticeList/:boardNo',
     name: 'BoardReadPage',
     component: () => import('@/views/notice/pages/BoardReadPage.vue'),
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
     path: 'writeNotice/:boardNo/edit',
     name: 'BoardModifyPage',
     component: () => import('@/views/notice/pages/BoardModifyPage.vue'),
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
+
   // 주석
   // {
   //   path: '/guide',
@@ -191,7 +192,7 @@ export const asyncRoutes: RouteConfig[] = [
         }
       }
     ]
-  },
+  }
   // {
   //   path: '/icon',
   //   component: Layout,
@@ -224,7 +225,6 @@ export const asyncRoutes: RouteConfig[] = [
   //     }
   //   ]
   // },
-
 
 ]
 

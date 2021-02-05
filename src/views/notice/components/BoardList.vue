@@ -1,37 +1,48 @@
 <template>
   <div>
-    <table border="1">
+    <table border="2">
       <tr>
         <th align="center" width="80">번호</th>
         <th align="center" width="320">제목</th>
-        <th align="center" width="100">작성자</th>
+        <th align="center" width="100">내용</th>
         <th align="center" width="180">등록일시</th>
       </tr>
 
-      <tr v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
-        <td colspan="4">
-          List is empty.
-        </td>
-      </tr>
-
-      <tr v-else v-for="board in boards" :key="board.boardNo">
-        <td align="center">{{ board.boardNo }}</td>
-        <td align="left"><router-link :to="{ name: 'BoardReadPage', params: { boardNo: board.boardNo.toString() } }">{{ board.title }}</router-link></td>
-        <td align="right">{{ board.writer }}</td>
-        <td align="center">{{ board.regDate }}</td>
+      <tr v-for="(value, id) in data" :key="id">
+        <th>{{ value.id }}</th>
+        <th>{{ value.title }}</th>
+        <th>{{ value.contents }}</th>
+        <th>{{ value.date }}</th>
       </tr>
     </table>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Board } from '@/store/modules/board';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Board } from '@/store/modules/board'
+import axios from 'axios'
 
 @Component
-export default class BoardList extends Vue {
-
+export default class extends Vue {
   @Prop() private boards!: Board[];
 
+  id = 0
+  contents = ''
+  title = ''
+  data = ''
+  date = ''
+
+  created() {
+    const BASE_URL = 'http://localhost:8000/t_notice/'
+    axios.get(`${BASE_URL}`).then((result: any) => {
+      this.id = result.data.id
+      this.title = result.data.title
+      this.contents = result.data.contents
+      this.date = result.data.date
+      this.data = result.data
+      console.log(result)
+    })
+  }
 }
 </script>
