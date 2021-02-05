@@ -1,19 +1,16 @@
+<template>
+  <article-detail :is-edit="false" />
+</template>
+
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { handleClipboard } from '@/utils/clipboard'
+import ArticleDetail from './components/ArticleDetail.vue'
 
 @Component({
-  name: 'Notice'
+  name: 'CreateArticle',
+  components: {
+    ArticleDetail
+  }
 })
-export default class extends Vue {
-  private handleClipboard = handleClipboard
-
-  private generateElementIconCode(symbol: string) {
-    return `<i class="el-icon-${symbol}" />`
-  }
-
-  private generateSvgIconCode(symbol: string) {
-    return `<svg-icon name="${symbol}" />`
-  }
-}
+export default class extends Vue {}
 </script>
