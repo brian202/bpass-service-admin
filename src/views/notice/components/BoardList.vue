@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <table border="2">
+  <div class="app-contatiner">
+    <table>
       <tr>
-        <th align="center" width="80">번호</th>
-        <th align="center" width="320">제목</th>
-        <th align="center" width="100">내용</th>
-        <th align="center" width="180">등록일시</th>
+        <td align="center" width="80">번호</td>
+        <td align="center" width="320">제목</td>
+        <!-- <td align="center" width="100">내용</td> -->
+        <td align="center" width="180">등록일시</td>
+        <td align="center" width="100">편집</td>
       </tr>
 
       <tr v-for="(value, id) in data" :key="id">
         <th>{{ value.id }}</th>
         <th>{{ value.title }}</th>
-        <th>{{ value.contents }}</th>
+        <!-- <th>{{ value.contents }}</th> -->
         <th>{{ value.date }}</th>
+        <th><input type = "button" value="Edit"></th>
       </tr>
     </table>
   </div>
@@ -26,7 +28,6 @@ import axios from 'axios'
 @Component
 export default class extends Vue {
   @Prop() private boards!: Board[];
-
   id = 0
   contents = ''
   title = ''
@@ -46,3 +47,17 @@ export default class extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+div {
+  padding: 20px;
+  width: 100%;
+}
+div table {
+  border-top: 1px solid #444444;
+  border-collapse: collapse;
+}
+th, td {
+  border-bottom: 1px solid #444444;
+  padding: 10px;
+}
+</style>
