@@ -125,7 +125,7 @@ export const constantRoutes: RouteConfig[] = [
     }
   },
   {
-    path: 'writeNotice/:boardNo/edit',
+    path: 'writeNotice/edit',
     name: 'BoardModifyPage',
     component: () => import('@/views/notice/pages/BoardModifyPage.vue'),
     props: {
