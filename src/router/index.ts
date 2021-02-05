@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 
 /* Layout */
 import Layout from '@/layout/index.vue'
+// import { RouterLinkStub } from '@vue/test-utils'
 
 Vue.use(VueRouter)
 
@@ -95,6 +96,11 @@ export const constantRoutes: RouteConfig[] = [
         }
       },
       {
+        path: 'writeNotice',
+        name: 'BoardRegisterPage',
+        component: () => import('@/views/notice/pages/BoardRegisterPage.vue')
+      },
+      {
         path: 'noticeList',
         component: () => import(/* webpackChunkName: "permission-directive" */ '@/views/notice/noticeList/index.vue'),
         name: 'NoticeList',
@@ -102,9 +108,31 @@ export const constantRoutes: RouteConfig[] = [
           title: 'noticeList'
           // if do not set roles, means: this page does not require permission
         }
+      },
+      {
+        path: 'noticeList',
+        name: 'BoardListPage',
+        component: () => import('@/views/notice/pages/BoardListPage.vue')
       }
     ]
   },
+  {
+    path: 'noticeList/:boardNo',
+    name: 'BoardReadPage',
+    component: () => import('@/views/notice/pages/BoardReadPage.vue'),
+    props: {
+      default: true
+    }
+  },
+  {
+    path: 'writeNotice/:boardNo/edit',
+    name: 'BoardModifyPage',
+    component: () => import('@/views/notice/pages/BoardModifyPage.vue'),
+    props: {
+      default: true
+    }
+  },
+
   // 주석
   // {
   //   path: '/guide',
@@ -180,11 +208,28 @@ export const asyncRoutes: RouteConfig[] = [
   //       }
   //     }
   //   ]
-  // }
+  // },
+  // {
+  //   path: '/BoardListPage',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'BoardListPage',
+  //       component: () => import('@/views/notice/pages/BoardListPage.vue'),
+  //       name: 'BoardListPage',
+  //       meta: {
+  //         title: 'BoardListPage',
+  //         icon: 'guide',
+  //         noCache: true
+  //       }
+  //     }
+  //   ]
+  // },
+
 ]
 
 const createRouter = () => new VueRouter({
-  // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
+  mode: 'history',
   scrollBehavior: (to, from, savedPosition) => {
     if (savedPosition) {
       return savedPosition
